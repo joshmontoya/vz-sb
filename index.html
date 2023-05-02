@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scenario Builder</title>
+</head>
+<body>
+    <h1 style="font-size: 35px; padding-bottom: 35px;">Verizon Scenario Builder</h1>
+    <div>
+        <div style="padding-bottom: 35px;">
+            <label class="ddLabels" for="userStoryIn"
+                style="font-size: 18px; font-weight: bold; padding-right: 10px">User Story ID
+            </label>
+            <input type="text" id="userStoryIn" maxlength="50" onchange="addToScenario('userStoryIn', 'userStoryId')">
+        </div>
+        <div style="width: 75%; padding-bottom: 57px;">
+            <div style="width: 50%; float: left;">
+                <div>
+                    <label class="labels" style="font-size: 18px; font-weight: bold; padding-right: 10px">Application</label>
+                    <select id="selApplication" onchange="addToScenario('selApplication','application'); initFunc()"></select>
+                </div>
+            </div>
+            <div style="width: 50%; float: right;">
+                <div>
+                    <label class="labels" style="font-size: 18px; font-weight: bold; padding-right: 10px">Account Type</label>
+                    <select id="selAcctType" onchange="addToScenario('selAcctType','acctType')"></select>
+                </div>
+            </div>
+        </div>
+        <div style="padding-bottom: 35px;">
+            <div style="padding-bottom: 10px">
+                <label class="labels" style="font-size: 18px; font-weight: bold">Functionalities</label>
+            </div>
+            <div>
+                <div style="padding-bottom: 10px">
+                    <div style="padding-bottom: 5px"><select id="selFunc" onchange="addFunc(); dispFunc()"></select></div>
+                    <label style="font-size: 13px; font-weight: bold; padding-right: 5px">
+                        Functionalities Selected:
+                    </label>
+                    <span id="result" style="font-size: 13px; color:firebrick"></span>
+                </div>
+                <div style="padding-bottom: 10px;">
+                    <label id="funcDoneMsg" style="font-size: 14px; color:blue; padding-right: 5px">If done selecting functionalities</label>
+                    <button id="funcDoneBtn" onclick="hideFunc()"> Click Here </button>
+                </div>
+                <div>
+                    <label id="clearFuncMsg" style="font-size: 14px; color:blue; padding-right: 5px">To clear all selections</label>
+                    <button id="clearFuncBtn" onclick="clearFuncArr(scenario.func); initFunc()"> Click Here </button>
+                </div>
+                
+            </div>
+        </div>
+        <button onclick="funcDetailsCreate()">TEST</button>
+
+        <div class="splitDiv" id="funcDetailsSec" style="display: none; width: 50%">
+            <h3 class="headers" style=>Functionality Details</h3>
+            <div style="width: 50%; float: left">
+                <p>Yo Yo, Bro</p>
+            
+            </div>
+        </div>
+            
+        <!-- <button id="funcDetails" onclick="funcDetailsCreate()"> Click </button> -->
+
+        <br><br><br>
+        <p>Hello World</p>
+
+
+
+    </div>
+    <script src="C:\Users\joshp\Documents\Web Dev Files\FF_Generator_Updates\joshp\ff-gen.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+</body>
+</html>
