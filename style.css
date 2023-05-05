@@ -1,0 +1,175 @@
+/** 
+* Manual Testing VZ-SB 
+* stylesheet
+* author: Josh Montoya
+* version: 1.0
+* last modified: 5/2/23 
+**/
+
+* {
+    font-family: Tahoma;
+}
+
+.container-home {
+    /* min-width: 1200px; */
+    display: grid;
+    grid-template-rows: repeat(5, auto);
+    margin-top: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+}
+
+.container-1 {
+    padding-top: 30px;
+    padding-bottom: 30px;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: black;
+}
+
+.container-2 {
+    display: grid;
+    width: 50%;
+    grid-template-columns: repeat(3, auto);
+    grid-template-rows: auto 40px;
+    align-items: start;
+}
+
+.container-3 {
+    display: grid;
+    grid-template-columns: 450px 40%;
+    grid-template-rows: repeat(2, auto);
+}
+.container-3-1 {
+    display: grid;
+    width: 68%;
+    grid-column: 1;
+    grid-template-columns: repeat(2, 200px);
+    grid-template-rows: 55px 40px;
+}
+.container-3-2 {
+    display: grid;
+    width: 95%;
+    grid-column: 1;
+    grid-row: 2;
+    grid-template-columns: 150px auto;
+    grid-template-rows: auto 100px auto;
+}
+
+.container-func-sel {
+    display: grid;
+    grid-column: 2;
+    grid-row: 2 / -1;
+    grid-template-rows: 25px auto;
+}
+.container-func-conf {
+    visibility: visible;
+    display: grid;
+    grid-column: 1 / span 2;
+    grid-row: 4;
+    grid-template-columns: 200px auto;
+    grid-template-rows: repeat(2, 35px);
+}
+.container-3-3 {
+    visibility: visible;
+    display: grid;
+    grid-column: 2;
+    grid-row: 1 / -1;
+    grid-template-columns: repeat(4, auto);
+    grid-template-rows: 55px 25px 50px 25px 50px;
+}
+
+#page-header {
+    font-size : 35px;
+    color: white;
+    border-bottom: 2px solid red;
+}
+
+.comp-lbl-type-1 {
+    font-size: 20px;
+    font-weight: bold;
+    border-bottom: 2px solid red;
+}
+
+.comp-lbl-type-2 {
+    font-size: 14px;
+    font-weight: bold;
+    color: gray;
+    width: auto;
+}
+
+.comp-lbl-type-3 {
+    font-size: 12px;
+    font-weight: bold;
+    color: gray;
+    width: auto;
+}
+
+#funcSel-lbl {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+#funcSel-res {
+    display: block;
+    position: relative;
+    width: 200px;
+    min-height: 14px;
+    padding: 5px;
+    border-radius: 10px;
+    border: 1px solid black;
+    font-size: 14px;
+    color: firebrick;
+
+}
+
+.btn-type-1 {
+    border-radius: 10px;
+    border: 2px solid firebrick;
+    padding: 5px 20px;
+    text-align: center;
+    background: black;
+    color: white;
+    font-weight: 600;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.select-type-1 {
+    width: 10em;
+    border-radius: 10px;
+    border: 2px solid firebrick;
+    padding: 2px;
+    background: black;
+    color: white;
+    height: 30px;
+    font-size: 14px;
+    font-weight: 400;
+}
+.select-type-2 {
+    width: 8em;
+    border-radius: 10px;
+    border: 2px solid firebrick;
+    padding: 2px;
+    background: black;
+    color: white;
+    height: 30px;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.input-type-1 {
+    border-radius: 10px;
+    width: 120px;
+    border: 1px solid black;
+    padding: 3px;
+    color: black;
+    font-size: 14px;
+}
+
+.hidden-elem {
+    visibility: hidden;
+}
+
+
