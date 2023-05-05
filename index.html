@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <title>Scenario Builder</title>
+    <link rel="stylesheet" href=".\css\style.css">
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"> -->
+</head>
+<body>
+    <div class="container-home">
+        <div class="container-1">
+            <b id="page-header">Verizon Scenario Builder</b>
+        </div>
+        <div class="container-2">
+            <div><p><label for="userStoryIn" class="comp-lbl-type-1">User Story ID</label></p></div>
+            <div style="grid-row: 2">
+                <input type="text" id="userStoryIn" class="input-type-1" maxlength="50" onchange="addToScenario('userStoryIn', 'userStoryId')">
+            </div>
+            <div><p><label for="uswinIn" class="comp-lbl-type-1">USWIN ID</label></p></div>
+            <div style="grid-row: 2">
+                <input type="text" id="uswinIn" class="input-type-1" maxlength="50" onchange="addToScenario('uswinId', 'userStoryId')">
+            </div>
+            <div class="hidden-elem"><p><label for="" class="comp-lbl-type-1">STUB</label></p></div>
+            <div style="grid-row: 2" class="hidden-elem">
+                <input type="text" id="" class="input-type-1" maxlength="50" onchange="addToScenario('', '')">
+            </div>
+        </div>
+        <div class="container-3">
+            <div class="container-3-1">
+                <div>
+                    <p><label for="selApplication" class="comp-lbl-type-1">Application</label></p>
+                </div>
+                <div>
+                    <p><label for="selAcctType" class="comp-lbl-type-1">Account Type</label></p>
+                </div>
+                <div>
+                    <select id="selApplication" class="select-type-1" onchange="addToScenario('selApplication','application'); 
+                        initFunc()"></select>
+                </div>
+                <div>
+                    <select id="selAcctType" class="select-type-1" onchange="addToScenario('selAcctType','acctType')"></select>
+                </div>
+            </div>
+            <div class="container-3-2">
+                <div style="grid-column: 1 / span 2">
+                    <p><label class="comp-lbl-type-1">Functionalities</label></p>
+                </div>
+                <div>
+                    <select id="selFunc" class="select-type-2" onchange="addFunc(); dispFunc()"><option>Select</option></select>
+                </div>
+
+                <div class="container-func-sel" style="visibility: hidden">
+                    <div><label id="funcSel-lbl">Functionalities Selected</label></div>
+                    <div><text id="funcSel-res"></text>
+                </div>
+                </div>
+                <div class="container-func-conf" style="visibility: hidden">
+                    <div><label id="funcDoneMsg" class="comp-lbl-type-3">If done selecting functionalities</label></div>
+                    <div><button id="funcDoneBtn" class="btn-type-1" onclick="doneFunc()"> Click Here </button></div>
+
+                    <div><label id="clearFuncMsg" class="comp-lbl-type-3">To clear all selections</label></div>
+                    <div><button id="clearFuncBtn" class="btn-type-1" onclick="clearFuncArr(scenario.func); initFunc()">Click Here</button></div>
+                </div>
+            </div>
+            <div class="container-3-3" style="visibility: hidden">
+                <div style="grid-column: 1 / span 4">
+                    <p><label class="comp-lbl-type-1">Functionality Details</label></p>
+                </div>
+                <div><label class="comp-lbl-type-2">New/AAL</label></div>
+                <div><label class="comp-lbl-type-2">Port-in(s)</label></div>
+                <div><label class="comp-lbl-type-2">Upgrade Line(s)</label></div>
+                <div><label class="comp-lbl-type-2">Accessories</label></div>
+                <div><select id="selStub" class="select-type-2" onchange=""><option>Select</option></select></div>
+                <div><select id="selStub" class="select-type-2" onchange=""><option>Select</option></select></div>
+                <div><select id="selStub" class="select-type-2" onchange=""><option>Select</option></select></div>
+                <div><select id="selStub" class="select-type-2" onchange=""><option>Select</option></select></div>
+                <div><label class="comp-lbl-type-2">Trade-ins</label></div>
+                <div><label class="comp-lbl-type-2">Plan Change(s)</label></div>
+                <div><label class="comp-lbl-type-2">Feature Change(s)</label></div>
+                <div><label class="comp-lbl-type-2">PLACEMARKER</label></div>
+                <div><select id="selStub" class="select-type-2" onchange=""><option>Select</option></select></div>
+                <div><select id="selStub" class="select-type-2" onchange=""><option>Select</option></select></div>
+                <div><select id="selStub" class="select-type-2" onchange=""><option>Select</option></select></div>
+                <div><select id="selStub" class="select-type-2" onchange=""><option>Select</option></select></div>
+            </div>
+
+        </div>
+
+        <div><br><hr>In progress</div>
+
+
+
+
+
+    </div>
+    <script src="./scripts/ff-gen.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+</body>
+</html>
