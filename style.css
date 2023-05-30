@@ -3,6 +3,14 @@
 * stylesheet
 * author: Josh Montoya
 * version: 1.0
+* last modified: 5/30/23 
+**/
+
+/** 
+* Manual Testing VZ-SB 
+* stylesheet
+* author: Josh Montoya
+* version: 1.0
 * last modified: 5/2/23 
 **/
 
@@ -10,35 +18,57 @@
     font-family: Tahoma;
 }
 
+hr {
+    border: 1px dotted gray;
+    border-radius: 5px;
+}
+
+.tooltip {
+    position: relative;
+}
+.tooltip .tooltip-text {
+    visibility: hidden;
+    border-radius: 10px;
+    border: 1px solid black;
+    width: 120px;
+    top: 25px;
+    left: 85px;
+    margin-left: -70px;
+    background-color: rgb(201, 66, 66);
+    color: white;
+    font-size: 12px;
+    text-align: center;
+    padding: 5px 0;
+    position: absolute;
+}
+.tooltip:hover .tooltip-text {
+    visibility: visible;
+}
+
 .container-home {
     /* min-width: 1200px; */
     display: grid;
     grid-template-rows: repeat(5, auto);
     margin-top: 10px;
-    margin-right: 10px;
+    margin-right: 10%;
     margin-bottom: 10px;
-    margin-left: 10px;
+    margin-left: 10%;
 }
 
 .container-1 {
-    padding-top: 30px;
-    padding-bottom: 30px;
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-left: 15px;
     background-color: black;
 }
 
 .container-2 {
     display: grid;
-    width: 50%;
-    grid-template-columns: repeat(3, auto);
+    grid-template-columns: repeat(3, 200px);
     grid-template-rows: auto 40px;
-    align-items: start;
 }
 
 .container-3 {
     display: grid;
-    grid-template-columns: 450px 40%;
+    grid-template-columns: 450px auto;
     grid-template-rows: repeat(2, auto);
 }
 .container-3-1 {
@@ -53,87 +83,139 @@
     width: 95%;
     grid-column: 1;
     grid-row: 2;
-    grid-template-columns: 150px auto;
+    grid-template-columns: 160px auto;
     grid-template-rows: auto 100px auto;
 }
-
-.container-func-sel {
+.container-func-selected {
     display: grid;
     grid-column: 2;
     grid-row: 2 / -1;
     grid-template-rows: 25px auto;
 }
 .container-func-conf {
-    visibility: visible;
     display: grid;
-    grid-column: 1 / span 2;
-    grid-row: 4;
-    grid-template-columns: 200px auto;
-    grid-template-rows: repeat(2, 35px);
-}
-.container-3-3 {
-    visibility: visible;
-    display: grid;
+    padding-bottom: 10px;
+    width: 180px;
+    border-radius: 10px;
     grid-column: 2;
-    grid-row: 1 / -1;
-    grid-template-columns: repeat(4, auto);
-    grid-template-rows: 55px 25px 50px 25px 50px;
+    grid-row: 3;
+    grid-template-columns: auto auto;
 }
-
-#page-header {
-    font-size : 35px;
-    color: white;
-    border-bottom: 2px solid red;
-}
-
-.comp-lbl-type-1 {
-    font-size: 20px;
-    font-weight: bold;
-    border-bottom: 2px solid red;
-}
-
-.comp-lbl-type-2 {
-    font-size: 14px;
-    font-weight: bold;
-    color: gray;
-    width: auto;
-}
-
-.comp-lbl-type-3 {
-    font-size: 12px;
-    font-weight: bold;
-    color: gray;
-    width: auto;
-}
-
-#funcSel-lbl {
+#func-selected-lbl-hdr {
     font-size: 14px;
     font-weight: bold;
 }
-
-#funcSel-res {
+#func-selected-res {
     display: block;
     position: relative;
-    width: 200px;
+    width: 220px;
     min-height: 14px;
     padding: 5px;
     border-radius: 10px;
     border: 1px solid black;
     font-size: 14px;
     color: firebrick;
+}
+.container-3-3 {
+    display: grid;
+    grid-column: 2;
+    grid-row: 1 / -1;
+    width: 650px;
+    grid-template-rows: 55px auto 45px;
+}
+.container-func-dtls-all {
+    display: grid;
+    grid-column: 1 / -1;
+    grid-row: 2;
+    grid-template-columns: repeat(5, 130px);
+    grid-template-rows: auto;
+}
+.container-func-dtls-ind {
+    display: grid;
+    grid-template-rows: 30px 75px;
+}
 
+.container-4 {
+    display: grid;
+    grid-template-columns: repeat(4, auto) 30px auto 30px auto;
+    grid-template-rows: repeat(2, auto);
+}
+.container-4-1 {
+    display: grid;
+    grid-row: 2;
+    grid-template-rows: repeat(2, auto);
+}
+.container-dev-contr-type-all {
+    display: grid;
+    grid-template-rows: repeat(4, auto);
+}
+.container-dev-contr-type-ind {
+    display: grid;
+    grid-template-rows: repeat(5, auto);
+}
+#container-trade-type {
+    display: grid;
+    grid-template-rows: repeat(5, auto);
+}
+
+.container-footer {
+    display: grid;
+    grid-template-columns: 75% 17% auto;
+}
+
+#page-header {
+    font-size : 35px;
+    color: white;
+    display: inline-block;
+    border-bottom: 2px solid red;
+}
+
+.padded-div {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.upg-split {
+    padding-top: 5px;
+    padding-bottom: 15px;
+    width: 130px;
+}
+
+.comp-lbl-hdr-type-1 {
+    font-size: 20px;
+    font-weight: bold;
+    border-bottom: 2px solid red;
+}
+
+.comp-lbl-hdr-type-2 {
+    font-size: 12px;
+    font-weight: bold;
+    color: gray;
 }
 
 .btn-type-1 {
     border-radius: 10px;
-    border: 2px solid firebrick;
-    padding: 5px 20px;
+    border: 2px solid black;
+    padding: 7px 20px;
     text-align: center;
-    background: black;
+    background: rgb(175, 173, 173);
     color: white;
-    font-weight: 600;
-    font-size: 12px;
+    font-weight: 550;
+    font-size: 15px;
     cursor: pointer;
+
+}
+.btn-type-1:hover {
+    background-color: gray;
+}
+.btn-type-1:active {
+    background-color: black;
+    transform: translateY(3px);
+}
+.btn-type-1:disabled {
+    pointer-events: none;
+    opacity: 0.35;
+    border: none;
 }
 
 .select-type-1 {
@@ -158,6 +240,17 @@
     font-size: 14px;
     font-weight: 400;
 }
+.select-type-3 {
+    width: 130px;
+    border-radius: 10px;
+    border: 2px solid firebrick;
+    padding: 2px;
+    background: black;
+    color: white;
+    height: 30px;
+    font-size: 14px;
+    font-weight: 400;
+}
 
 .input-type-1 {
     border-radius: 10px;
@@ -166,6 +259,17 @@
     padding: 3px;
     color: black;
     font-size: 14px;
+}
+
+.not-appl-msg {
+    padding: 0px 5px 5px;
+    width: 120px;
+    font-size: 14px;
+    font-weight: bold;
+    color: gray;
+}
+.remSel:focus option:first-of-type {
+    display: none;
 }
 
 .hidden-elem {
