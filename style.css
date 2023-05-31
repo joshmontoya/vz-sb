@@ -3,15 +3,7 @@
 * stylesheet
 * author: Josh Montoya
 * version: 1.0
-* last modified: 5/30/23 
-**/
-
-/** 
-* Manual Testing VZ-SB 
-* stylesheet
-* author: Josh Montoya
-* version: 1.0
-* last modified: 5/2/23 
+* last modified: 5/31/23 
 **/
 
 * {
@@ -50,9 +42,9 @@ hr {
     display: grid;
     grid-template-rows: repeat(5, auto);
     margin-top: 10px;
-    margin-right: 10%;
+    margin-right: auto;
     margin-bottom: 10px;
-    margin-left: 10%;
+    margin-left: auto;
 }
 
 .container-1 {
@@ -160,7 +152,7 @@ hr {
 
 .container-footer {
     display: grid;
-    grid-template-columns: 75% 17% auto;
+    grid-template-columns: 80% 12% auto;
 }
 
 #page-header {
