@@ -38,7 +38,7 @@ hr {
 }
 
 .container-home {
-    /* min-width: 1200px; */
+    max-width: 1250px;
     display: grid;
     grid-template-rows: repeat(5, auto);
     margin-top: 10px;
