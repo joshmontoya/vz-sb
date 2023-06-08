@@ -3,11 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Scenario Builder 2.0</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href=".\css\style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"> -->
+    <script defer src="./scripts/db-scenario-objects.js"></script>
+    <script defer src="./scripts/ff-gen-functions.js"></script>
+    <script defer src="./scripts/ff-gen.js"></script>
+    
+    <!-- Temp - just for next step testing -->
+    <script defer src="./scripts/db-step-lib.js"></script>
+
 </head>
 <body>
     <div class="container-home">
@@ -51,7 +57,7 @@
                     <p><label for="sel-func" class="comp-lbl-hdr-type-1">Functionalities</label></p>
                 </div>
                 <div id="sel-func-tooltip" class="tooltip">
-                    <select id="sel-func" class="select-type-1 remSel" disabled onchange="addFunc()"><option>Select</option></select>
+                    <select id="sel-func" class="select-type-1 remSel" disabled onchange=""><option>Select</option></select>
                     <span id="sel-func-tooltip-text" class="tooltip-text">Please select an application first</span>
                 </div>
 
@@ -115,15 +121,19 @@
                             <option>Select</option></select></div>
                     </div>
                     <div id="func-dtls-8" class="container-func-dtls-ind" style="display: none">
-                        <div><label for="func-dtls-8-sel" class="comp-lbl-hdr-type-2">PLACEMARKER</label></div>
-                        <div><select id="func-dtls-8-sel"  class="select-type-2 remSel" onchange="addToScenario(this, '')">
+                        <div><label for="func-dtls-8-sel" class="comp-lbl-hdr-type-2">Promotions Accepted</label></div>
+                        <div><select id="func-dtls-8-sel"  class="select-type-2 remSel" onchange="addToScenario(this, 'numPromo')">
                             <option>Select</option></select></div>
                     </div>
+                    <div id="quote-checkbox" class="container-func-dtls-ind" style="padding-left: 20px; display: none">
+                        <div><label for="func-dtls-quote" class="comp-lbl-hdr-type-2">Quote?</label></div>
+                        <div><input type="checkbox" id="func-dtls-quote" onchange="addToScenario(this, 'isQuote')"></input></div>
+                    </div> 
                 </div>
-                <div id="btn-done-func-dtls-tooltip" class="tooltip" style="width: 90px">
-                    <button id="btn-done-func-dtls" style="display: none" class="btn-type-1" 
+                <div id="btn-func-dtls-done-tooltip" style="display: none" class="tooltip" style="width: 90px">
+                    <button id="btn-func-dtls-done" class="btn-type-1" 
                     disabled onclick="doneFuncDtls()">Done</button>
-                    <span id="btn-done-func-dtls-tooltip-text" class="tooltip-text">Please complete all required selections</span>
+                    <span id="btn-func-dtls-done-tooltip-text" class="tooltip-text">Please complete all required selections</span>
                 </div>
             </div>
         </div>
@@ -190,7 +200,7 @@
                             </div> 
                     </div>
                     <div class="padded-div dev-contr-type-retEx" style="display: none; padding-top: 0px">
-                        <select id="dev-type-retEx-sel" class="select-type-3 remSel" onchange="addToScenario(this, 'devTypeRetEx')">
+                        <select id="dev-type-retEx-sel" class="select-type-3 remSel" onchange="addDvcContrTypeDtls(this, 'devTypeRetEx'); eligPmtType()">
                             <option>Exchange</option></select></div>
                 </div>
                 <div class="not-appl-msg dev-contr-type-na-msg" style="display: none">Not applicable for chosen functionalities</div>
@@ -292,16 +302,7 @@
                 <span id="btn-next-tooltip-text" class="tooltip-text">Please complete all required fields/selections</span>
             </div>
         </div>
-
-
-        <div><br><br><br><button onclick="test()"> Test Button </button></div>
-
-
-
-
-
     </div>
-    <script src="ff-gen.js"></script>
 
 </body>
 </html>
