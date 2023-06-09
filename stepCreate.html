@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Test Steps</title>
+    <link rel="stylesheet" href=".\css\style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script defer src="./scripts/db-scenario-objects.js"></script>
+    <script defer src="./scripts/functions.js"></script>
+    <script defer src="./scripts/steps.js"></script>
+    <script defer src="./scripts/db-step-lib.js"></script>
+
+
+</head>
+<body>
+    <!-- Temp - Testing -->
+    <a href="scenarioJSON.html" target="_blank"><button> JSON </button></a>
+    <br><br>
+    <button onclick="test()"> Test </button>
+    <br><br><hr><br>
+    <!-- Temp - Testing -->
+
+    <div class="container-steps">
+        <div class="container-1">
+            <h1 id="page-header">Test Steps</h1>
+        </div>
+        <div id="feat-steps" style="display: none">
+            <table style="text-align: center">
+                <thead>
+                    <tr>
+                        <th style="width: 70%; position: sticky; top: 0; text-align: left">
+                            <p><label class="comp-lbl-hdr-type-1">Feature Steps</label></p>
+                        </th>
+                        <th style="width: 20%; position: sticky; top: 0; text-align: center">
+                            <p><label class="comp-lbl-hdr-type-1">Field Data (if appl)</label></p>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody id="scenario-steps-table">
+
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <br><hr><br>
+            <button id="download-ff" href="#"> Download Feature File </button>
+        </div>
+        
+    </div>
+
+</body>
+</html>

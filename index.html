@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scenario Builder 2.0</title>
+    <link rel="stylesheet" href=".\css\style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script defer src="./scripts/db-scenario-objects.js"></script>
+    <script defer src="./scripts/functions.js"></script>
+    <script defer src="./scripts/scenario.js"></script>
+
+</head>
+<body>
+    <div class="container-home">
+        <div class="container-1">
+            <h1 id="page-header">Verizon Scenario Builder 2.0</h1>
+        </div>
+        <div class="container-2">
+            <div><p><label for="user-story-in" class="comp-lbl-hdr-type-1">User Story ID</label></p></div>
+            <div style="grid-row: 2">
+                <input type="text" id="user-story-in" class="input-type-1 requiredEle" maxlength="50" onchange="addToScenario(this, 'userStoryId')">
+            </div>
+            <div><p><label for="uswin-in" class="comp-lbl-hdr-type-1">USWIN ID</label></p></div>
+            <div style="grid-row: 2">
+                <input type="text" id="uswin-in" class="input-type-1 requiredEle" maxlength="50" onchange="uswinEntry()">
+            </div>
+            <div style="display: none"><p><label for="stub" class="comp-lbl-hdr-type-1">STUB</label></p></div>
+            <div style="grid-row: 2; display: none">
+                <input type="text" id="stub" class="input-type-1" maxlength="50" onchange="addToScenario('', '')">
+            </div>
+        </div>
+        <div class="container-3">
+            <div class="container-3-1">
+                <div>
+                    <p><label for="sel-application" class="comp-lbl-hdr-type-1">Application</label></p>
+                </div>
+                <div>
+                    <p><label for="sel-acct-type" class="comp-lbl-hdr-type-1">Account Type</label></p>
+                </div>
+                <div>
+                    
+                    <select id="sel-application" class="select-type-1 remSel requiredEle" onchange="addToScenario(this,'application'); 
+                        initFunc(); initAcctTypes(); enableReset()"><option>Select</option></select>
+                </div>
+                <div id="sel-acct-type-tooltip" class="tooltip">
+                    <select id="sel-acct-type" class="select-type-1 remSel requiredEle" disabled onchange="addToScenario(this,'acctType')"><option>Select</option></select>
+                    <span id="sel-acct-type-tooltip-text" class="tooltip-text">Please select an application first</span>
+                </div>
+            </div>
+            <div class="container-3-2">
+                <div style="grid-column: 1 / span 2">
+                    <p><label for="sel-func" class="comp-lbl-hdr-type-1">Functionalities</label></p>
+                </div>
+                <div id="sel-func-tooltip" class="tooltip">
+                    <select id="sel-func" class="select-type-1 remSel" disabled onchange=""><option>Select</option></select>
+                    <span id="sel-func-tooltip-text" class="tooltip-text">Please select an application first</span>
+                </div>
+
+                <div class="container-func-selected">
+                    <div><span id="func-selected-lbl-hdr">Functionalities Selected</span></div>
+                    <div><text id="func-selected-res"></text>
+                </div>
+                </div>
+                <div class="container-func-conf">
+                    <div><button id="btn-func-done" class="btn-type-1" disabled onclick="doneFunc()">Done</button></div>
+                    <div><button id="btn-func-clear" class="btn-type-1" disabled onclick="clearFuncArr(scenario.func)">Clear</button></div>
+                </div>
+            </div>
+            <div class="container-3-3">
+                <div style="grid-column: 1 / -1">
+                    <p><span class="comp-lbl-hdr-type-1">Functionality Details</span></p>
+                </div>
+                <div class="container-func-dtls-all">
+                    <div id="func-dtls-1" class="container-func-dtls-ind" style="display: none">
+                        <div><label for="func-dtls-1-sel" class="comp-lbl-hdr-type-2">New/AAL</label></div>
+                        <div><select id="func-dtls-1-sel" class="select-type-2 remSel" onchange="addToScenario(this,'numNewAal');
+                                newAalFuncDtlsChg()"><option>Select</option></select></div>
+                    </div>
+                    <div id="func-dtls-2" class="container-func-dtls-ind" style="display: none">
+                        <div><label for="func-dtls-2-sel" class="comp-lbl-hdr-type-2">Port-in</label></div>
+                        <div class="tooltip newAal-func-tooltip">
+                            <select id="func-dtls-2-sel" class="select-type-2 remSel" disabled onchange="addToScenario(this,'numPortIn')">
+                                <option>Select</option></select>
+                                <span class="tooltip-text newAal-func-tooltip-text">Please select number of New/AAL first</span>
+                        </div>
+                    </div>
+                    <div id="func-dtls-3" class="container-func-dtls-ind" style="display: none">
+                        <div><label for="func-dtls-3-sel" class="comp-lbl-hdr-type-2">Upgrade</label></div>
+                        <div class="tooltip newAal-func-tooltip">
+                            <select id="func-dtls-3-sel" class="select-type-2 remSel" disabled onchange="addToScenario(this,'numUpg')">
+                                <option>Select</option></select>
+                            <span class="tooltip-text newAal-func-tooltip-text">Please select number of New/AAL first</span>
+                        </div>
+                    </div>
+                    <div id="func-dtls-4" class="container-func-dtls-ind" style="display: none">
+                        <div><label for="func-dtls-4-sel" class="comp-lbl-hdr-type-2">Accessory</label></div>
+                        <div><select id="func-dtls-4-sel" class="select-type-2 remSel" onchange="addToScenario(this,'numAcces')">
+                            <option>Select</option></select></div>
+                    </div>
+                    <div id="func-dtls-5" class="container-func-dtls-ind" style="display: none">
+                        <div><label for="func-dtls-5-sel" class="comp-lbl-hdr-type-2">Trade-in</label></div>
+                        <div><select id="func-dtls-5-sel" class="select-type-2 remSel" onchange="addToScenario(this,'numTradeIn')">
+                            <option>Select</option></select></div>
+                    </div>
+                    <div id="func-dtls-6" class="container-func-dtls-ind" style="display: none">
+                        <div><label for="func-dtls-6-sel" class="comp-lbl-hdr-type-2">Plan Add/Change</label></div>
+                        <div class="tooltip newAal-func-tooltip">
+                            <select id="func-dtls-6-sel" class="select-type-2 remSel" disabled onchange="addToScenario(this,'numPlanChg')">
+                                <option>Select</option></select>
+                            <span class="tooltip-text newAal-func-tooltip-text">Please select number of New/AAL first</span>
+                        </div>
+                    </div>
+                    <div id="func-dtls-7" class="container-func-dtls-ind" style="display: none">
+                        <div><label for="func-dtls-7-sel" class="comp-lbl-hdr-type-2">Feat. Add/Change</label></div>
+                        <div><select id="func-dtls-7-sel" class="select-type-2 remSel" onchange="addToScenario(this,'numFeatChg')">
+                            <option>Select</option></select></div>
+                    </div>
+                    <div id="func-dtls-8" class="container-func-dtls-ind" style="display: none">
+                        <div><label for="func-dtls-8-sel" class="comp-lbl-hdr-type-2">Promotions Accepted</label></div>
+                        <div><select id="func-dtls-8-sel"  class="select-type-2 remSel" onchange="addToScenario(this, 'numPromo')">
+                            <option>Select</option></select></div>
+                    </div>
+                    <div id="quote-checkbox" class="container-func-dtls-ind" style="padding-left: 20px; display: none">
+                        <div><label for="func-dtls-quote" class="comp-lbl-hdr-type-2">Quote?</label></div>
+                        <div><input type="checkbox" id="func-dtls-quote" onchange="addToScenario(this, 'isQuote')"></input></div>
+                    </div> 
+                </div>
+                <div id="btn-func-dtls-done-tooltip" style="display: none" class="tooltip" style="width: 90px">
+                    <button id="btn-func-dtls-done" class="btn-type-1" 
+                    disabled onclick="doneFuncDtls()">Done</button>
+                    <span id="btn-func-dtls-done-tooltip-text" class="tooltip-text">Please complete all required selections</span>
+                </div>
+            </div>
+        </div>
+        <div><hr></div>
+        <div class="container-4">
+            <div style="grid-column: 1"><p><span class="comp-lbl-hdr-type-1">Depletion Type</span></p></div>
+            <div style="grid-column: 2"><p><span class="comp-lbl-hdr-type-1">Device Type</span></p></div>
+            <div style="grid-column: 3"><p><span class="comp-lbl-hdr-type-1">Contract Type</span></p></div>
+            <div id="down-pmt-label" style="display: none; align-items: flex-end; grid-column: 4">
+                <p class="comp-lbl-hdr-type-2">Down Payment?</p></div>
+            <div style="grid-column: 5"><p><span class="comp-lbl-hdr-type-1">Trade-In Type</span></p></div>
+            <div style="grid-column: 6"></div>
+            <div style="grid-column: 7"><p><span class="comp-lbl-hdr-type-1">Plan Type</span></p></div>
+            <div style="grid-column: 8"></div>
+            <div style="grid-column: 9"><p><span class="comp-lbl-hdr-type-1">Payment Type</span></p></div>
+            <div class="container-4-1" style="grid-column: 1">
+                <div id="depl-type" style="display: none"><select id="depl-type-sel" class="select-type-3 remSel" onchange="addToScenario(this, 'deplType')">
+                        <option>Select</option></select></div>
+                <div id="depl-type-na-msg" class="not-appl-msg" style="display: none">Not applicable for chosen functionalities</div>
+            </div>
+            <div class="container-4-1" style="grid-column: 2">
+                <div class="container-dev-contr-type-all" style="display: none">
+                    <div class="container-dev-contr-type-ind dev-contr-type-newAal" style="display: none">
+                        <div class="padded-sel-div dev-contr-type-1" style="display: none; padding-top: 0px;">
+                            <select id = dev-type-1-sel class="select-type-3 remSel" onchange="addDvcContrTypeDtls(this, 'devTypeNewAal'); eligPmtType()">
+                                <option>New/AAL Line 1</option></select>
+                        </div>
+                        <div class="padded-sel-div dev-contr-type-2" style="display: none">
+                            <select id = dev-type-2-sel class="select-type-3 remSel" onchange="addDvcContrTypeDtls(this, 'devTypeNewAal'); eligPmtType()">
+                                <option>New/AAL Line 2</option></select>
+                        </div> 
+                        <div class="padded-sel-div dev-contr-type-3" style="display: none">
+                            <select id = dev-type-3-sel class="select-type-3 remSel" onchange="addDvcContrTypeDtls(this, 'devTypeNewAal'); eligPmtType()">
+                                <option>New/AAL Line 3</option></select>
+                        </div>
+                        <div class="padded-sel-div dev-contr-type-4" style="display: none">
+                            <select id = dev-type-4-sel class="select-type-3 remSel" onchange="addDvcContrTypeDtls(this, 'devTypeNewAal'); eligPmtType()">
+                                <option>New/AAL Line 4</option></select>
+                        </div> 
+                        <div class="padded-sel-div dev-contr-type-5" style="display: none">
+                            <select id = dev-type-5-sel class="select-type-3 remSel" onchange="addDvcContrTypeDtls(this, 'devTypeNewAal'); eligPmtType()">
+                                <option>New/AAL Line 5</option></select>
+                        </div> 
+                    </div>
+                    <div class="upg-split" style="display: none"><hr></div>
+                    <div class="container-dev-contr-type-ind dev-contr-type-upg" style="display: none">
+                            <div class="padded-sel-div dev-contr-type-6" style="display: none; padding-top: 0px">
+                                <select id = dev-type-6-sel class="select-type-3 remSel" onchange="addDvcContrTypeDtls(this, 'devTypeUpg'); eligPmtType()">
+                                    <option>Upgrade Line 1</option></select>
+                            </div>
+                            <div class="padded-sel-div dev-contr-type-7" style="display: none">
+                                <select id = dev-type-7-sel class="select-type-3 remSel" onchange="addDvcContrTypeDtls(this, 'devTypeUpg'); eligPmtType()">
+                                    <option>Upgrade Line 2</option></select>
+                            </div> 
+                            <div class="padded-sel-div dev-contr-type-8" style="display: none">
+                                <select id = dev-type-8-sel class="select-type-3 remSel" onchange="addDvcContrTypeDtls(this, 'devTypeUpg'); eligPmtType()">
+                                    <option>Upgrade Line 3</option></select>
+                            </div>
+                            <div class="padded-sel-div dev-contr-type-9" style="display: none">
+                                <select id = dev-type-9-sel class="select-type-3 remSel" onchange="addDvcContrTypeDtls(this, 'devTypeUpg'); eligPmtType()">
+                                    <option>Upgrade Line 4</option></select>
+                            </div> 
+                            <div class="padded-sel-div dev-contr-type-10" style="display: none">
+                                <select id = dev-type-10-sel class="select-type-3 remSel" onchange="addDvcContrTypeDtls(this, 'devTypeUpg'); eligPmtType()">
+                                    <option>Upgrade Line 5</option></select>
+                            </div> 
+                    </div>
+                    <div class="padded-sel-div dev-contr-type-retEx" style="display: none; padding-top: 0px">
+                        <select id="dev-type-retEx-sel" class="select-type-3 remSel" onchange="addDvcContrTypeDtls(this, 'devTypeRetEx'); eligPmtType()">
+                            <option>Exchange</option></select></div>
+                </div>
+                <div class="not-appl-msg dev-contr-type-na-msg" style="display: none">Not applicable for chosen functionalities</div>
+            </div>
+            <div class="container-4-1" style="grid-column: 3">
+                <div class="container-dev-contr-type-all" style="display: none">
+                    <div class="container-dev-contr-type-ind dev-contr-type-newAal" style="display: none">
+                        <div class="padded-sel-div dev-contr-type-1" style="display: none; padding-top: 0px;">
+                            <select id = contr-type-1-sel class="select-type-3 remSel" onchange="addDvcContrTypeDtls(this, 'contrTypeNewAal')">
+                                <option>New/AAL Line 1</option></select>
+                        </div>
+                        <div class="padded-sel-div dev-contr-type-2" style="display: none">
+                            <select id = contr-type-2-sel class="select-type-3 remSel" onchange="addDvcContrTypeDtls(this, 'contrTypeNewAal')">
+                                <option>New/AAL Line 2</option></select>
+                        </div> 
+                        <div class="padded-sel-div dev-contr-type-3" style="display: none">
+                            <select id = contr-type-3-sel class="select-type-3 remSel" onchange="addDvcContrTypeDtls(this, 'contrTypeNewAal')">
+                                <option>New/AAL Line 3</option></select>
+                        </div>
+                        <div class="padded-sel-div dev-contr-type-4" style="display: none">
+                            <select id = contr-type-4-sel class="select-type-3 remSel" onchange="addDvcContrTypeDtls(this, 'contrTypeNewAal')">
+                                <option>New/AAL Line 4</option></select>
+                        </div> 
+                        <div class="padded-sel-div dev-contr-type-5" style="display: none">
+                            <select id = contr-type-5-sel class="select-type-3 remSel" onchange="addDvcContrTypeDtls(this, 'contrTypeNewAal')">
+                                <option>New/AAL Line 5</option></select>
+                        </div> 
+                    </div>
+                    <div class="upg-split" style="display: none"><hr></div>
+                    <div class="container-dev-contr-type-ind dev-contr-type-upg" style="display: none">
+                            <div class="padded-sel-div dev-contr-type-6" style="display: none; padding-top: 0px">
+                                <select id = contr-type-6-sel class="select-type-3 remSel" onchange="addDvcContrTypeDtls(this, 'contrTypeUpg')">
+                                    <option>Upgrade Line 1</option></select>
+                            </div>
+                            <div class="padded-sel-div dev-contr-type-7" style="display: none">
+                                <select id = contr-type-7-sel class="select-type-3 remSel" onchange="addDvcContrTypeDtls(this, 'contrTypeUpg')">
+                                    <option>Upgrade Line 2</option></select>
+                            </div> 
+                            <div class="padded-sel-div dev-contr-type-8" style="display: none">
+                                <select id = contr-type-8-sel class="select-type-3 remSel" onchange="addDvcContrTypeDtls(this, 'contrTypeUpg')">
+                                    <option>Upgrade Line 3</option></select>
+                            </div>
+                            <div class="padded-sel-div dev-contr-type-9" style="display: none">
+                                <select id = contr-type-9-sel class="select-type-3 remSel" onchange="addDvcContrTypeDtls(this, 'contrTypeUpg')">
+                                    <option>Upgrade Line 4</option></select>
+                            </div> 
+                            <div class="padded-sel-div dev-contr-type-10" style="display: none">
+                                <select id = contr-type-10-sel class="select-type-3 remSel" onchange="addDvcContrTypeDtls(this, 'contrTypeUpg')">
+                                    <option>Upgrade Line 5</option></select>
+                            </div> 
+                    </div>
+                    <div class="padded-sel-div dev-contr-type-retEx" style="display: none; padding-top: 0px">
+                        <select id="contr-type-retEx-sel" class="select-type-3 remSel" onchange="addToScenario(this, 'contrTypeRetEx')">
+                            <option>Exchange</option></select></div>
+                </div>
+                <div class="not-appl-msg dev-contr-type-na-msg" style="display: none">Not applicable for chosen functionalities</div>
+            </div>
+            <div class="container-4-1" style="grid-column: 4">
+                <div class="container-dev-contr-type-all" style="display: none">
+                    <div class="container-dev-contr-type-ind dev-contr-type-down-pmt">
+                        <div id="down-pmt-1" class="padded-chkbox-div" style= "display: none">
+                            <input type="checkbox" id="down-pmt-1-box" onchange="addDownPmt(this, 'downPmtNewAal')"></input>
+                        </div>
+                        <div id="down-pmt-2" class="padded-chkbox-div" style= "display: none">
+                            <input type="checkbox" id="down-pmt-2-box" onchange="addDownPmt(this, 'downPmtNewAal')"></input>
+                        </div>
+                        <div id="down-pmt-3" class="padded-chkbox-div" style= "display: none">
+                            <input type="checkbox" id="down-pmt-3-box" onchange="addDownPmt(this, 'downPmtNewAal')"></input>
+                        </div>
+                        <div id="down-pmt-4" class="padded-chkbox-div" style= "padding-bottom: 32px;display: none">
+                            <input type="checkbox" id="down-pmt-4-box" onchange="addDownPmt(this, 'downPmtNewAal')"></input>
+                        </div>
+                        <div id="down-pmt-5" class="padded-chkbox-div" style= "display: none">
+                            <input type="checkbox" id="down-pmt-5-box" onchange="addDownPmt(this, 'downPmtNewAal')"></input>
+                        </div>
+                    </div>
+                    <div id="down-pmt-split" style="padding-bottom: 30px; display: none"></div>
+                    <div class="container-dev-contr-type-ind dev-contr-type-upg" style="display: none">
+                        <div id="down-pmt-6" class="padded-chkbox-div" style="display: none">
+                            <input type="checkbox"  id="down-pmt-6-box" onchange="addDownPmt(this, 'downPmtUpg')"></input>
+                        </div>
+                        <div id="down-pmt-7" class="padded-chkbox-div" style= "display: none">
+                            <input type="checkbox" id="down-pmt-7-box" onchange="addDownPmt(this, 'downPmtUpg')"></input>
+                        </div>
+                        <div id="down-pmt-8" class="padded-chkbox-div" style= "display: none">
+                            <input type="checkbox" id="down-pmt-8-box" onchange="addDownPmt(this, 'downPmtUpg')"></input>
+                        </div>
+                        <div id="down-pmt-9" class="padded-chkbox-div" style= "display: none">
+                            <input type="checkbox" id="down-pmt-9-box" onchange="addDownPmt(this, 'downPmtUpg')"></input>
+                        </div>
+                        <div id="down-pmt-10" class="padded-chkbox-div" style= "display: none">
+                            <input type="checkbox" id="down-pmt-10-box" onchange="addDownPmt(this, 'downPmtUpg')"></input>
+                        </div>
+                    </div>
+                    <div></div>
+                </div>
+            </div>
+            <div class="container-4-1">
+                <div id="container-trade-type" style="display: none">
+                    <div class="padded-sel-div" style="padding-top: 0px">
+                        <select id="trade-type-1-sel" class="select-type-3 remSel" style="display: none" onchange="addToScenario(this, 'tradeType')"><option>Select</option></select>
+                    </div>
+                    <div class="padded-sel-div"><select id="trade-type-2-sel" class="select-type-3 remSel" style="display: none" onchange="addToScenario(this, 'tradeType')">
+                            <option>Select</option></select></div>
+                    <div class="padded-sel-div"><select id="trade-type-3-sel" class="select-type-3 remSel" style="display: none" onchange="addToScenario(this, 'tradeType')">
+                            <option>Select</option></select></div>
+                    <div class="padded-sel-div"><select id="trade-type-4-sel" class="select-type-3 remSel" style="display: none" onchange="addToScenario(this, 'tradeType')">
+                            <option>Select</option></select></div>
+                    <div class="padded-sel-div"><select id="trade-type-5-sel" class="select-type-3 remSel" style="display: none" onchange="addToScenario(this, 'tradeType')">
+                            <option>Select</option></select></div>
+                </div>
+                <div id="trade-type-na-msg" class="not-appl-msg" style="display: none">Not applicable for chosen functionalities</div>
+            </div>
+            <div class="container-4-1" style="grid-column: 7">
+                <div id="plan-type" style="display: none">
+                    <div id="plan-type-tooltip" class="tooltip">
+                        <select id="plan-type-sel" class="select-type-3 remSel" onchange="addToScenario(this, 'planType')">
+                            <option>Select</option></select><span id="plan-type-tooltip-text" class="tooltip-text">
+                                Only MDN-level plan allowable with New Activations</span></div>
+                    </div>
+                <div id="plan-type-na-msg" class="not-appl-msg" style="display: none">Not applicable for chosen functionalities</div>
+            </div>
+            <div class="container-4-1" style="grid-column: 9">
+                <div id="pmt-type" class="tooltip" style="display: none"><select id="pmt-type-sel" class="select-type-3 remSel" disabled onchange="addToScenario(this, 'pmtType')">
+                        <option>Select</option></select><span id="pmt-type-tooltip-text" class="tooltip-text">Please select Device Type(s) first</span></div>
+                <div id="pmt-type-na-msg" class="not-appl-msg" style="display: none">Not applicable for chosen functionalities</div>
+            </div>
+        </div>
+        <div><hr></div>
+        <div class="container-footer">
+            <div style="grid-column: 1; padding-top: 10px; padding-bottom: 10px";><button id="btn-reset" class="btn-type-1" disabled
+                onclick="reset()">Reset</button></div>
+            <div id="btn-atc-tooltip" class="tooltip" style="grid-column: 2; padding-top: 10px; padding-bottom: 10px";>
+                <button id="btn-add-to-cart" class="btn-type-1" style="float: right" disabled onclick="addToCart()">Add to Cart</button>
+                <span id="btn-atc-tooltip-text" class="tooltip-text">Please complete all required fields/selections</span>
+            </div>
+            <div id="btn-next-tooltip" class="tooltip" style="grid-column: 3; padding-top: 10px; padding-bottom: 10px">
+                <a id="anchor-next"><button id="btn-next" class="btn-type-1" style="float: right" disabled onclick="next()">Next</button></a>
+                <span id="btn-next-tooltip-text" class="tooltip-text">Please complete all required fields/selections</span>
+            </div>
+        </div>
+    </div>
+    
+    <br><br><hr><br>
+    <a href="stepCreate.html" target="_blank"><button> Test </button></a>
+    <br><br><hr><br>
+    
+</body>
+</html>
