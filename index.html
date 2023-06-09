@@ -76,7 +76,7 @@
                     <div id="func-dtls-1" class="container-func-dtls-ind" style="display: none">
                         <div><label for="func-dtls-1-sel" class="comp-lbl-hdr-type-2">New/AAL</label></div>
                         <div><select id="func-dtls-1-sel" class="select-type-2 remSel" onchange="addToScenario(this,'numNewAal');
-                                newAalFuncDtlsChg()"><option>Select</option></select></div>
+                                newAalFuncDtlsChg(this)"><option>Select</option></select></div>
                     </div>
                     <div id="func-dtls-2" class="container-func-dtls-ind" style="display: none">
                         <div><label for="func-dtls-2-sel" class="comp-lbl-hdr-type-2">Port-in</label></div>
@@ -89,7 +89,7 @@
                     <div id="func-dtls-3" class="container-func-dtls-ind" style="display: none">
                         <div><label for="func-dtls-3-sel" class="comp-lbl-hdr-type-2">Upgrade</label></div>
                         <div class="tooltip newAal-func-tooltip">
-                            <select id="func-dtls-3-sel" class="select-type-2 remSel" disabled onchange="addToScenario(this,'numUpg')">
+                            <select id="func-dtls-3-sel" class="select-type-2 remSel" disabled onchange="addToScenario(this,'numUpg'); newAalFuncDtlsChg(this)">
                                 <option>Select</option></select>
                             <span class="tooltip-text newAal-func-tooltip-text">Please select number of New/AAL first</span>
                         </div>
