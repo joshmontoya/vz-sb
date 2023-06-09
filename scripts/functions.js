@@ -87,19 +87,27 @@ function funcArrayComp(arr){
 }
 
 
-function newAalFuncDtlsChg(){
-    const newAalVal = $("#func-dtls-1-sel").val();
-    remTooltip('.newAal-func-tooltip', '.newAal-func-tooltip-text');
-    dropDownNums("#func-dtls-2-sel", 1, newAalVal);
-    $("#func-dtls-2-sel").prop("disabled", false);
-    dropDownNums("#func-dtls-3-sel", 1, 5 - newAalVal);
-    $("#func-dtls-3-sel").prop("disabled", false);
-    if(scenario.func.includes("Plan Change")){
-        $("#func-dtls-6-sel").prop("disabled", false);
-    }
-    dropDownNums("#func-dtls-6-sel", newAalVal, 5);
-    $("#func-dtls-6-sel").val(newAalVal);
-    addToScenario(document.getElementById("func-dtls-6-sel"), "numPlanChg");
+function newAalFuncDtlsChg(ele){
+    const eleVal = $(ele).val();
+    if($(ele).attr("id") == 'func-dtls-1-sel'){
+        remTooltip('.newAal-func-tooltip', '.newAal-func-tooltip-text');
+        dropDownNums("#func-dtls-2-sel", 1, eleVal);
+        $("#func-dtls-2-sel").prop("disabled", false);
+        const tempUpgVal = $("#func-dtls-3-sel").val();
+        dropDownNums("#func-dtls-3-sel", 1, 5 - eleVal);
+        $("#func-dtls-3-sel").val(tempUpgVal);
+        $("#func-dtls-3-sel").prop("disabled", false);
+        if(scenario.func.includes("Plan Change")){
+            $("#func-dtls-6-sel").prop("disabled", false);
+        }
+        dropDownNums("#func-dtls-6-sel", eleVal, 5);
+        $("#func-dtls-6-sel").val(eleVal);
+        addToScenario(document.getElementById("func-dtls-6-sel"), "numPlanChg");
+    }else{
+        const tempNewAalVal = $("#func-dtls-1-sel").val();
+        dropDownNums("#func-dtls-1-sel", 1, 5 - eleVal);
+        $("#func-dtls-1-sel").val(tempNewAalVal);
+    } 
 }
 
 
