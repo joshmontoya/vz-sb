@@ -1,6 +1,8 @@
 
 let scenarios = JSON.parse(localStorage.scenarioData);
-console.log(scenarios);
 
 let outputSteps = [];
-console.log(outputSteps);
+let outputStepsAllScenarios = [];
+let manualOutputSteps = [];
+let manualOutputStepsAllScenarios = [];
+let fieldFuncCount = 0;
