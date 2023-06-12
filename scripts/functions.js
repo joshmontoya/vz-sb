@@ -706,11 +706,29 @@ function finalBtnEnable(){
 }
 
 
-function test(){ //FIXME
-    getStepGroups();
+function test1(){ //FIXME
     $("#feat-steps").show();
-    dispSteps(outputSteps);
+    // Empty any previous entries for field updates or reloads
+    $("#scenario-steps-table").empty();
+    fieldFuncCount = 0;
+    scenarios.forEach(function(scenario, index){
+        getStepGroups(scenario);
+        finalizeOutputSteps(scenario, index);
+    })
 }
+
+function test2(){ //FIXME
+    $("#feat-steps").show();
+    // Empty any previous entries for field updates or reloads
+    $("#scenario-steps-table").empty();
+    fieldFuncCount = 0;
+    scenarios.forEach(function(scenario, index){
+        makeSteps(scenario);
+        finalizeManualOutputSteps(scenario, index);
+    })
+}
+
+
 
 
 
